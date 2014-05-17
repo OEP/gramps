@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.staticfiles',
     'django.contrib.messages', # 1.4
     'django.contrib.sites',
     'django.contrib.admin',
@@ -141,7 +142,11 @@ TRANSACTIONS_MANAGED = False
 LOCALE_PATHS = tuple()
 
 # Changes for Django 1.3:
-CACHES = {}
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 USE_L10N = True
 FORMAT_MODULE_PATH = ""
 ## End Changes for Django 1.3
