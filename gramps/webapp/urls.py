@@ -34,8 +34,12 @@ import os
 #
 #------------------------------------------------------------------------
 from gramps.gen.const import IMAGE_DIR, ROOT_DIR, DATA_DIR
-from django.conf.urls.defaults import *
+try:
+    from django.conf.urls import patterns, url, include
+except ImportError:
+    from django.conf.urls.defaults import patterns, url, include
 from django.contrib import admin
+from django.views.generic.base import RedirectView
 
 admin.autodiscover()
 
@@ -62,7 +66,7 @@ urlpatterns += patterns('',
 # The rest will match views:
 urlpatterns += patterns('',
     (r'^$', main_page),
-    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', 
+    (r'^favicon\.ico$', RedirectView.as_view(),
      {'url': '/styles/images/favicon.ico'}),
     (r'^user/$', user_page),
     (r'^json/$', process_json_request),
